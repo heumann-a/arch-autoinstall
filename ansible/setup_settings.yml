@@ -1,0 +1,129 @@
+---
+- name: core.yml - Archlinux Setup
+  hosts: all
+  become: yes
+
+  tasks:
+# SYSTEM SETTINGS CHANGES ----------------------------------------------------
+
+    - name: pacman - enable color
+      lineinfile:
+        path: /etc/pacman.conf
+        regexp: '^#Color$'
+        line: 'Color'
+
+    - name: pacman - enable ParallelDownloads = 10
+      lineinfile:
+        path: /etc/pacman.conf
+        regexp: '#ParallelDownloads = 10'
+        line: 'ParallelDownloads = 10'
+
+    - name: fstab change relatime to noatime
+      replace:
+        path: /etc/fstab
+        regexp: 'relatime'
+        replace: 'noatime'
+
+# ARCHLINUX-KEYRING WEEKLY UPDATE  -------------------------------------------
+
+    - name: archlinux-keyring - enable weekly update
+      systemd:
+        name: archlinux-keyring-wkd-sync.timer
+        enabled: yes
+        state: started
+
+# SSD TRIM SCHEDULED  --------------------------------------------------------
+
+    - name: install util-linux
+      pacman:
+        name:
+          - util-linux
+
+    - name: enable and start weekly ssd disks trim using fstrim timer
+      systemd:
+        name: fstrim.timer
+        enabled: yes
+        state: started
+
+# CACHE CLEANER SCHEDULED  ---------------------------------------------------
+
+    - name: install pacman-contrib
+      pacman:
+        name:
+          - pacman-contrib
+
+    - name: enable and start weekly cache cleanup paccache timer
+      systemd:
+        name: paccache.timer
+        enabled: yes
+        state: started
+
+# LOGROTATE  -----------------------------------------------------------------
+
+    - name: install logrotate
+      pacman:
+        name:
+          - logrotate
+
+    - name: logrotate - enable compression
+      lineinfile:
+        path: /etc/logrotate.conf
+        regexp: '^#compress$'
+        line: 'compress'
+
+    - name: enable and start daily logs rotation, cleanup
+      systemd:
+        name: logrotate.timer
+        enabled: yes
+        state: started
+
+# NEOFETCH  ------------------------------------------------------------------
+
+    - name: install neofetch
+      pacman:
+        name:
+          - neofetch
+
+    - name: run neofetch to generate config
+      become: no
+      command: neofetch
+
+    - name: enable disk info in neofetch
+      become: no
+      lineinfile:
+        path: ~/.config/neofetch/config.conf
+        regexp: '.*# info "Disk" disk$'
+        line: '    info "Disk" disk'
+
+    - name: enable local IP info in neofetch
+      become: no
+      lineinfile:
+        path: ~/.config/neofetch/config.conf
+        regexp: '.*# info "Local IP" local_ip$'
+        line: '    info "Local IP" local_ip'
+
+# ZSH ------------------------------------------------------------------------
+
+    - name: change shell
+      become: yes
+      user:
+        name: "{{ ansible_user }}"
+        shell: /bin/zsh
+
+    - name: Intall oh-my-zsh 
+      become: no
+      shell: "curl -fsSL  https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sh"
+
+ # GIT -----------------------------------------------------------------------
+
+    - git_config:
+        name: user.email
+        scope: global
+        value: alex
+
+    - git_config:
+        name: user.name
+        scope: global
+        value: alex
+
+#  -----------------------------

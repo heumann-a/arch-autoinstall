@@ -1,0 +1,36 @@
+---
+- name: setup_software.yml - software
+  hosts: all
+  become: yes
+
+  tasks:
+
+    - name: Install user programs
+      pacman:
+        update_cache: yes
+        name:
+          - timeshift
+          - code
+          - alacritty
+          - zsh
+          - zsh-autosuggestions
+          - easyeffect
+          - vivaldi
+          - vivaldi-ffmpeg-codecs 
+          - obsidian
+          - git
+          - python 
+          - qmk
+          - keepassxc
+          - discord
+          - spotify-launcher
+          - nextcloud-client 
+          - steam
+          - lutris 
+          - rustup 
+          - qemu-full
+          - powerdevil
+
+
+# Install custom Tools not available in pacman
+
