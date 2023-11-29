@@ -1,10 +1,7 @@
 {
-    "archinstall-language": "English",
-    "audio_config": {
-        "audio": "pipewire"
-    },
-    "bootloader": "Systemd-boot",
     "config_version": "2.6.3",
+    "archinstall-language": "English",
+    "bootloader": "Systemd-boot",
     "debug": false,
     "hostname": "sleipnir",
     "kernels": [
@@ -19,6 +16,7 @@
         "sys_enc": "UTF-8",
         "sys_lang": "de_DE"
     },
+
     "mirror_config": {
         "custom_mirrors": [],
         "mirror_regions": {
@@ -75,7 +73,7 @@
                 "http://ftp.gwdg.de/pub/linux/archlinux/$repo/os/$arch",
                 "http://ftp.fau.de/archlinux/$repo/os/$arch",
                 "http://ftp.agdsn.de/pub/mirrors/archlinux/$repo/os/$arch",
-                "http://ftp-stud.hs-esslingen.de/pub/Mirrors/archlinux/$repo/os/$arch",
+                "http://ftp-stud.hs-esslingen.de/pub/Mirrors/archlinux/$repo/os/$arch"
             ]
         }
     },
@@ -83,20 +81,33 @@
         "type": "nm",
         "dhcp": true
     },
+    "audio_config": {
+        "audio": "pipewire"
+    },
     "no_pkg_lookups": false,
     "ntp": true,
     "offline": false,
-    "packages": [
-        "plasma", "plasma-wayland-session", "xorg-wayland", "hyprland", "amd-ucode"
-    ],
     "parallel downloads": 10,
+    "packages": [
+        "plasma",
+        "plasma-wayland-session",
+        "xorg-wayland",
+        "hyprland",
+        "amd-ucode"
+    ],
     "profile_config": {
         "gfx_driver": "AMD / ATI (open-source)",
-        "greeter": "sddm"
+        "greeter": "sddm",
+        "profile": {
+            "custom_settings": {},
+            "details": [],
+            "main": "Minimal"
+        }
     },
+    "save_config": true,
     "script": "guided",
     "silent": false,
     "swap": true,
     "timezone": "Europe/Berlin",
-    "version": "2.6.2"
+    "version": "2.7.0"
 }

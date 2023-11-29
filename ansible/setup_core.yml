@@ -18,10 +18,10 @@
       pacman:
         update_cache: yes
         name:
-          - sway
           - plasma
           - plasma-wayland-session
-          - xorg-wayland
+          - xorg-xwayland
+          - hyprland
           - amd-ucode
           - sddm
           - pipewire

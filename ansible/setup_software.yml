@@ -29,6 +29,8 @@
           - lutris 
           - rustup 
           - qemu-full
+          - virt-manager
+          - libvirt
           - powerdevil
 
 
