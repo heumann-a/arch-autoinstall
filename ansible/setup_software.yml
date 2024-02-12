@@ -9,14 +9,19 @@
       pacman:
         update_cache: yes
         name:
+          - sudo
           - timeshift
           - code
           - alacritty
           - zsh
           - zsh-autosuggestions
+          - nano
+          - inkscape
           - easyeffect
           - vivaldi
           - vivaldi-ffmpeg-codecs 
+          - vlc
+          - ffmpeg
           - obsidian
           - git
           - python 
@@ -27,12 +32,30 @@
           - nextcloud-client 
           - steam
           - lutris 
-          - rustup 
           - qemu-full
           - virt-manager
           - libvirt
           - powerdevil
 
-
+# --------------------------------------------
 # Install custom Tools not available in pacman
+# --------------------------------------------
 
+    - name: Get Heroic Games Launcher latest tag 
+      github_release:
+        user: gogs
+        repo: gogs
+        action: latest_release
+      register: gogs_latest 
+
+    - name: Intall Heroic Games Launcher
+      unarchive: 
+        src: "https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/releases/download/Heroic-{{ gogs_latest['tag'].AppImage"
+        dest: /opt/bin
+        remote_src: true 
+
+    - name: Install Footage (Flathub)
+      community.general.flatpak:
+        name:
+          - io.gitlab.adhami3310.Footage
+        state: present

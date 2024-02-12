@@ -24,9 +24,8 @@ install arch linux ([archinstall](https://github.com/archlinux/archinstall)), lo
   `cd arch-autoinstall`
 * run the playbooks you want
     * `ansible-playbook -u $USER -K ansible/playbook_core.yml`
-    * `ansible-playbook -u $USER -K ansible/playbook_zsh.yml`
-    * `ansible-playbook -u $USER -K ansible/playbook_lts_kernel.yml`
-    * `ansible-playbook -u $USER -K ansible/playbook_docker.yml`
+    * `ansible-playbook -u $USER -K ansible/playbook_settings.yml`
+    * `ansible-playbook -u $USER -K ansible/playbook_software.yml`
 
 Yes, you write `$USER` there, which puts in the user you are logged in <br> The `-K` is short for `--ask-become-pass` which will prompt for password
 

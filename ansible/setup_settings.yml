@@ -32,19 +32,6 @@
         enabled: yes
         state: started
 
-# SSD TRIM SCHEDULED  --------------------------------------------------------
-
-    - name: install util-linux
-      pacman:
-        name:
-          - util-linux
-
-    - name: enable and start weekly ssd disks trim using fstrim timer
-      systemd:
-        name: fstrim.timer
-        enabled: yes
-        state: started
-
 # CACHE CLEANER SCHEDULED  ---------------------------------------------------
 
     - name: install pacman-contrib
@@ -114,16 +101,23 @@
       become: no
       shell: "curl -fsSL  https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sh"
 
+    - name: copy .myownrc
+        copy:
+          src: ./.own.cfg
+          dest: ~/.zshrc
+          mode: '0644'
+
+
  # GIT -----------------------------------------------------------------------
 
     - git_config:
         name: user.email
         scope: global
-        value: alex
+        value: heumann-a
 
     - git_config:
         name: user.name
         scope: global
-        value: alex
+        value: heumann-a
 
 #  -----------------------------
