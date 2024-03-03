@@ -3,7 +3,7 @@
     "archinstall-language": "English",
     "bootloader": "Systemd-boot",
     "debug": false,
-    "hostname": "sleipnir",
+    "hostname": "Sleipnir",
     "kernels": [
         "linux"
     ],
@@ -12,7 +12,7 @@
         "multilib"    
     ],
     "locale_config": {
-        "kb_layout": "de",
+        "kb_layout": "de-latin1",
         "sys_enc": "UTF-8",
         "sys_lang": "de_DE"
     },

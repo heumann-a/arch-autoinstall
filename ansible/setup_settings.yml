@@ -64,30 +64,14 @@
         enabled: yes
         state: started
 
-# NEOFETCH  ------------------------------------------------------------------
+# HYPRLAND---------------------------------------------------------------------
 
-    - name: install neofetch
-      pacman:
-        name:
-          - neofetch
+    - name: copy .myownrc
+        copy:
+          src: ../dotconfig/hyprland.cfg
+          dest: ~/.config/hypr/hyprland.conf
+          mode: '0644'
 
-    - name: run neofetch to generate config
-      become: no
-      command: neofetch
-
-    - name: enable disk info in neofetch
-      become: no
-      lineinfile:
-        path: ~/.config/neofetch/config.conf
-        regexp: '.*# info "Disk" disk$'
-        line: '    info "Disk" disk'
-
-    - name: enable local IP info in neofetch
-      become: no
-      lineinfile:
-        path: ~/.config/neofetch/config.conf
-        regexp: '.*# info "Local IP" local_ip$'
-        line: '    info "Local IP" local_ip'
 
 # ZSH ------------------------------------------------------------------------
 
@@ -95,7 +79,7 @@
       become: yes
       user:
         name: "{{ ansible_user }}"
-        shell: /bin/zsh
+        shell: /usr/bin/zsh
 
     - name: Intall oh-my-zsh 
       become: no
@@ -103,7 +87,7 @@
 
     - name: copy .myownrc
         copy:
-          src: ./.own.cfg
+          src: ../dotconfig/zsh.cfg
           dest: ~/.zshrc
           mode: '0644'
 
@@ -119,5 +103,10 @@
         name: user.name
         scope: global
         value: heumann-a
+
+    - git_config:
+        name: credential.helper
+        scope: global
+        value: 'cache --timout=3600'
 
 #  -----------------------------

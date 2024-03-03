@@ -18,17 +18,44 @@
       pacman:
         update_cache: yes
         name:
-          - plasma
-          - plasma-wayland-session
+        # Base programs
           - xorg-xwayland
-          - hyprland
           - amd-ucode
+          - linux-firmware 
+          - mesa
+          - acpilight
           - sddm
-          - pipewire
-          - wireplumber
-          - dolphin
+          - iwd
+          - networkmanager
+        # Necessary Programms and Security
           - kde-connect
           - plasma-systemmonitor
           - nftables 
           - firewalld
           - flatpak
+        # Desktop environment
+          - hyprland 
+          - hyprpaper
+          - hyprctl
+          - hyprlock
+          - hyprpicker
+          - waybar
+          - wofi
+          - dunst
+          - wl-clipboard
+          - cliphist
+          - xdg-desktop-portal-hyprland
+          - polkit-kde-agent
+          - qt5-wayland
+          - qt6-wayland
+          - pipewire
+          - pipewire-audio
+          - pipewire-pulse
+          - pipewire-alsa
+          - pipewire-jack
+          - wireplumber
+          - slurp
+        # Necessary Programs
+          - alacritty
+          - dolphin
+          - vivaldi

@@ -12,13 +12,12 @@
           - sudo
           - timeshift
           - code
-          - alacritty
           - zsh
           - zsh-autosuggestions
           - nano
+          - code
           - inkscape
           - easyeffect
-          - vivaldi
           - vivaldi-ffmpeg-codecs 
           - vlc
           - ffmpeg
