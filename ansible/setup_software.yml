@@ -14,10 +14,8 @@
           - code
           - zsh
           - zsh-autosuggestions
-          - nano
           - code
           - inkscape
-          - easyeffect
           - vivaldi-ffmpeg-codecs 
           - vlc
           - ffmpeg
@@ -34,7 +32,7 @@
           - qemu-full
           - virt-manager
           - libvirt
-          - powerdevil
+
 
 # --------------------------------------------
 # Install custom Tools not available in pacman

@@ -4,7 +4,8 @@
   become: yes
 
   tasks:
-# SYSTEM SETTINGS CHANGES ----------------------------------------------------
+
+# SYSTEM SETTINGS CHANGES ---------------------------------------------------
 
     - name: pacman - enable color
       lineinfile:
@@ -24,13 +25,49 @@
         regexp: 'relatime'
         replace: 'noatime'
 
-# ARCHLINUX-KEYRING WEEKLY UPDATE  -------------------------------------------
+# ARCHLINUX-KEYRING WEEKLY UPDATE  ------------------------------------------
 
     - name: archlinux-keyring - enable weekly update
       systemd:
         name: archlinux-keyring-wkd-sync.timer
         enabled: yes
         state: started
+
+# POWER DAEMON --------------------------------------------------------------
+
+    - name: Set PPD as active 
+      systemd:
+        name: powertop
+        enabled: yes
+        state: started
+
+    - name: Auto-Tune power profile
+      become: true
+      shell: "powertop --auto-tune"
+
+# WIFI REGDOMAIN--------------------------------------------------------------
+
+- name: Ensure WIFI Domain is set to DE
+    lineinfile:
+      dest: /etc/conf.d/wireless-regdom
+      regexp: '^#\s*WIRELESS_REGDOM.*$'
+      line: 'WIRELESS_REGDOM="DE"'
+
+# IWD Backend ---------------------------------------------------------------
+
+  - name: Disable iwd
+    systemd:
+      name: iwd.service
+      enabled: no
+      state: stopped
+
+  - name: Creating a file with content
+    copy:
+      dest: /etc/NetworkManager/conf.d/wifi_backend.conf
+      content: |
+        [device]
+        wifi.backend=iwd
+
 
 # CACHE CLEANER SCHEDULED  ---------------------------------------------------
 

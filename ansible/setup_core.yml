@@ -27,9 +27,9 @@
           - sddm
           - iwd
           - networkmanager
+          - wireless-regdb 
+          - power-profiles-daemon
         # Necessary Programms and Security
-          - kde-connect
-          - plasma-systemmonitor
           - nftables 
           - firewalld
           - flatpak
@@ -40,22 +40,28 @@
           - hyprlock
           - hyprpicker
           - waybar
-          - wofi
-          - dunst
-          - wl-clipboard
-          - cliphist
+          - wofi 
+          - dunst # notification daemon
           - xdg-desktop-portal-hyprland
-          - polkit-kde-agent
+          - polkit-kde-agent # authentication agent
           - qt5-wayland
           - qt6-wayland
-          - pipewire
+        # Other Programms for hyprland
+          - wl-clipboard
+          - cliphist
+          - slurp
+          - udisks2
+          - udiskie
+        # Sound
+          - pipewire 
           - pipewire-audio
           - pipewire-pulse
           - pipewire-alsa
           - pipewire-jack
           - wireplumber
-          - slurp
+          - easyeffect
         # Necessary Programs
           - alacritty
           - dolphin
           - vivaldi
+          - nano
