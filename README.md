@@ -51,8 +51,14 @@ After running playbooks it be good to remove ansible and archinstall package and
   - set drive auto-mount in fstab
 
 
-```bash
+### Enroll fingerprint
 
+[Arch Guide](https://wiki.archlinux.org/title/Fprint)
+```bash
+lsusb # Check if device is supported
+sudo pacman -S fprintd # install fingerprint daemon
+fprintd-enroll -f #{left,right}-{thumb,{index,middle,ring,little}-finger} # install specific finger
+fprintd-verify 
 ```
 
 ```bash
