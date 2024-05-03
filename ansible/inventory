@@ -1,5 +1,3 @@
-[target_arch_machines]
-localhost
+[defaults]
+localhost ansible_connection=local
 
-[all:vars]
-ansible_connection=local

@@ -35,41 +35,75 @@ After running playbooks it be good to remove ansible and archinstall package and
 * `sudo pacman -Rns ansible archinstall`
 
 
-## Code Snippets
+## Code Snippets after Install
 
-### Format Drives
 
 ### Add second luks drive to autocrypt
  
-- Format Drive with keyfile
-  - put keyfile preferably in /root and 700 permission
-  - add pw as backup decryption
-- Get UUID for crypttab with `blkid -f`
-  - set drive auto-encrypt in `/etc/crypttab`
-- Reboot
-- Get UUID for fstab with `blkid -f`
-  - set drive auto-mount in fstab
+- Create keyfile for autoencrypt `dd if=/dev/urandom bs=512 count=8 of=/root/.keyfile`
+- Change Permission of keyfile for autoencrypt `chmod 700 /root/.keyfile`
+- Encrypt second drive `cryptsetup luksFormat <device>` 
+  - Set long password and store it safely
+  - Open Drive `cryptsetup open <device> <mapper-name>`
+  - Add the keyfile `cryptsetup luksAddKey <device> [/path/to/additionalkeyfile]`
 
+- Get UUID for crypttab with `blkid -f`
+  - Set drive auto-encrypt in `/etc/crypttab`
+    - `<mapper-name>      UUID=<UUID>   /root/.keyfile   luks,discard`
+- Reboot
+- Create BTRFS partition: `mkfs.btrfs -L data /dev/mapper/<mapper-name>`
+- Add device to `etc/fstab`:
+  - `UUID=<UUID>    /data   brfs  rw,noatime,compress=zlib:3,ssd,space_cache=v2 0 2`
+- Reboot
 
 ### Enroll fingerprint
 
-[Arch Guide](https://wiki.archlinux.org/title/Fprint)
 ```bash
 lsusb # Check if device is supported
 sudo pacman -S fprintd # install fingerprint daemon
 fprintd-enroll -f #{left,right}-{thumb,{index,middle,ring,little}-finger} # install specific finger
 fprintd-verify 
 ```
+ 
+#### Activate Fingerprint for authentication
+
+Add user to allow no password login
 
 ```bash
-
+groupadd -r nopasswdlogin
+gpasswd -a username nopasswdlogin
 ```
 
 
-```bash
+Modify following files and add the two lines
 
+- `/etc/pam.d/kde` for KDE plasma LockScreen
+- `/etc/pam.d/sudo` for SUDO (press Enter instead of typing PW in)
+
+```bash
+auth     sufficient 		        pam_unix.so try_first_pass likeauth nullok
+auth     sufficient 		        pam_fprintd.so
 ```
 
+- `/etc/pam.d/sddm` for LoginScreen Manager
+```bash
+auth 	   [success=1 new_authtok_reqd=1 default=ignore]  	pam_unix.so try_first_pass likeauth nullok
+auth 	   sufficient  	pam_fprintd.so
+```
+ 
+ - `/etc/pam.d/kde` for KDE Lockscreen
+```bash
+auth      sufficient  	pam_unix.so try_first_pass likeauth nullok
+auth      sufficient  	pam_fprintd.so
+```
+
+
+### Add D-Bus Rights to Spotify Flatpak 
+
+-  Open Flatseal and navigate to Spotify
+-  Under **System Bus > Own** add
+   - `org.mpris.MediaPlayer2.spotify`
+ - Restart Spotify
 
 ```bash
 

@@ -13,7 +13,6 @@
           - timeshift
           - code
           - zsh
-          - zsh-autosuggestions
           - code
           - inkscape
           - vivaldi-ffmpeg-codecs 
@@ -25,34 +24,29 @@
           - qmk
           - keepassxc
           - discord
-          - spotify-launcher
           - nextcloud-client 
           - steam
           - lutris 
           - qemu-full
           - virt-manager
           - libvirt
-
+          - wine
+          - winetricks
+          - ttf-liberation # steam font
 
 # --------------------------------------------
 # Install custom Tools not available in pacman
 # --------------------------------------------
 
-    - name: Get Heroic Games Launcher latest tag 
-      github_release:
-        user: gogs
-        repo: gogs
-        action: latest_release
-      register: gogs_latest 
-
-    - name: Intall Heroic Games Launcher
-      unarchive: 
-        src: "https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/releases/download/Heroic-{{ gogs_latest['tag'].AppImage"
-        dest: /opt/bin
-        remote_src: true 
-
-    - name: Install Footage (Flathub)
+    - name: Install Flatpak Software
       community.general.flatpak:
         name:
+          - com.heroicgameslauncher.hgl
+          - com.teamspeak.TeamSpeak
+          - com.spotify.Client
+          - org.prismlauncher.PrismLauncher
+          - com.github.tchx84.Flatseal
           - io.gitlab.adhami3310.Footage
+          - org.signal.Signal
         state: present
+

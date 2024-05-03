@@ -16,8 +16,9 @@
     - name: pacman - enable ParallelDownloads = 10
       lineinfile:
         path: /etc/pacman.conf
-        regexp: '#ParallelDownloads = 10'
+        regexp: '#ParallelDownloads = '
         line: 'ParallelDownloads = 10'
+        backrefs: yes
 
     - name: fstab change relatime to noatime
       replace:
@@ -68,20 +69,6 @@
         [device]
         wifi.backend=iwd
 
-
-# CACHE CLEANER SCHEDULED  ---------------------------------------------------
-
-    - name: install pacman-contrib
-      pacman:
-        name:
-          - pacman-contrib
-
-    - name: enable and start weekly cache cleanup paccache timer
-      systemd:
-        name: paccache.timer
-        enabled: yes
-        state: started
-
 # LOGROTATE  -----------------------------------------------------------------
 
     - name: install logrotate
@@ -104,10 +91,10 @@
 # HYPRLAND---------------------------------------------------------------------
 
     - name: copy .myownrc
-        copy:
-          src: ../dotconfig/hyprland.cfg
-          dest: ~/.config/hypr/hyprland.conf
-          mode: '0644'
+      copy:
+        src: ../dotconfig/hyprland.cfg
+        dest: ~/.config/hypr/hyprland.conf
+        mode: '0644'
 
 
 # ZSH ------------------------------------------------------------------------
@@ -122,12 +109,30 @@
       become: no
       shell: "curl -fsSL  https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sh"
 
-    - name: copy .myownrc
-        copy:
-          src: ../dotconfig/zsh.cfg
-          dest: ~/.zshrc
-          mode: '0644'
+    - name: Intall zsh-autosuggestions
+      become: no
+      shell: "git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions"
 
+    - name: Intall zsh-syntax-highlighting
+      become: no
+      shell: "git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting"
+
+    - name: copy .myownrc
+      copy:
+        src: ../dotconfig/zsh.cfg
+        dest: ~/.zshrc
+        mode: '0644'
+
+
+
+# QMK ------------------------------------------------------------------------
+
+    - name: Copy QMK Udev rules
+      become: yes
+      copy:
+        src: ../dotconfig/50-qmk.rules
+        dest: /etc/udev/rules.d/50-qmk.rules
+        mode: '0644'
 
  # GIT -----------------------------------------------------------------------
 

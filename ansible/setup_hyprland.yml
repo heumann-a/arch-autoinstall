@@ -1,0 +1,34 @@
+---
+- name: hyprland.yml - Archlinux Hyprland Setup
+  hosts: all
+  become: yes
+
+  tasks:
+
+
+# INSTALL VARIOUS PACKAGES  --------------------------------------------------
+
+    - name: Install desktop environment
+      pacman:
+        update_cache: yes
+        name:
+          - hyprland
+          - dunst
+          - waybar
+          - kitty
+          - wofi
+          - xdg-desktop-portal-hyprland
+          - qt5-wayland
+          - qt6-wayland
+          - polkit-kde-agent # authentication agent
+        # hyprland specific programs environment
+          - hyprpaper
+          - hyprctl
+          - hyprlock
+          - hyprpicker
+        # Other Programms for hyprland
+          - wl-clipboard
+          - cliphist
+          - slurp
+          - udisks2
+          - udiskie
