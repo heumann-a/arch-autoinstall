@@ -109,6 +109,40 @@ auth      sufficient  	pam_fprintd.so
 
 ```
 
+### Install AUR Package Manager aura
+
+```bash
+git clone https://aur.archlinux.org/aura-bin.git
+cd aura-bin
+makepkg
+sudo pacman -U <the-package-file-that-makepkg-produces>
+
+```
+
+### Install Snapper
+
+Replace filepath of /.snapshots if its at another location.
+Replace XIDX with the actual ID of the newly created subvolume of snapper.
+
+```bash 
+sudo umount /.snapshots
+sudo rm -rf /.snapshots
+snapper -c config create-config /
+sudo btrfs subvolume delete -i XIDX /
+sudo mkdir /.snapshots
+sudo mount /.snapshots 
+sudo systemctl snapper-timeline.timer
+sudo systemctl snapper-cleanup.time
+```
+Copy config 
+
+
+
+
+```bash
+
+```
+
 
 ```bash
 

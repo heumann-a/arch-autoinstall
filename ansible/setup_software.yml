@@ -19,9 +19,16 @@
           - vlc
           - ffmpeg
           - obsidian
+          - veracrypt
+          - okular
+          - gwenview
           - git
           - python 
           - qmk
+          - d-spy
+          - base-devel
+          - snapper
+          - snap-pac
           - keepassxc
           - discord
           - nextcloud-client 
@@ -49,4 +56,3 @@
           - io.gitlab.adhami3310.Footage
           - org.signal.Signal
         state: present
-
