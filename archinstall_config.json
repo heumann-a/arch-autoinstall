@@ -16,7 +16,6 @@
         "sys_enc": "UTF-8",
         "sys_lang": "de_DE"
     },
-
     "mirror_config": {
         "custom_mirrors": [],
         "mirror_regions": {
@@ -113,15 +112,11 @@
         "curl",
         "usbutils",
         "fprintd",
-        "pipewire",
         "pipewire-audio",
         "pipewire-pulse",
         "pipewire-alsa",
         "pipewire-jack",
         "wireplumber",
-        "easyeffects",
-        "lsp-plugins-lv2",
-        "calf", 
         "alacritty",
         "dolphin",
         "vivaldi",

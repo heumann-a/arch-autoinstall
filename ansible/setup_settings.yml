@@ -69,6 +69,15 @@
         [device]
         wifi.backend=iwd
 
+
+# FIREWALL -------------------------------------------------------------------
+
+  - name: Enable firewalld
+    systemd:
+      name: firewalld.service
+      enabled: yes
+      state: started
+
 # LOGROTATE  -----------------------------------------------------------------
 
     - name: install logrotate
@@ -113,7 +122,7 @@
       become: no
       shell: "git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions"
 
-    - name: Intall zsh-syntax-highlighting
+    - name: Install zsh-syntax-highlighting
       become: no
       shell: "git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting"
 
@@ -123,6 +132,19 @@
         dest: ~/.zshrc
         mode: '0644'
 
+
+# BLACKARCH-------------------------------------------------------------------
+
+    - name: Download Blackarch.sh
+      ansible.builtin.get_url:
+        url: https://blackarch.org/strap.sh
+        dest: /tmp/strap.sh
+        mode: '0555'
+        checksum: sha1:26849980b35a42e6e192c6d9ed8c46f0d6d06047
+
+    - name: Install Blackarch
+      become: yes
+      ansible.builtin.shell: /tmp/strap.sh
 
 
 # QMK ------------------------------------------------------------------------

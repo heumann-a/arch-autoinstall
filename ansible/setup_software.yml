@@ -24,9 +24,11 @@
           - gwenview
           - git
           - python 
+          - easyeffects
           - qmk
           - d-spy
           - base-devel
+          - kicad
           - snapper
           - snap-pac
           - keepassxc
@@ -39,6 +41,16 @@
           - libvirt
           - wine
           - winetricks
+          - wine-mono
+
+    - name: Install dependencies for other programs
+      pacman:
+        reason: dependency
+        name:
+          - kicad-library 
+          - kicad-library-3d
+          - lsp-plugins-lv2
+          - calf 
           - ttf-liberation # steam font
 
 # --------------------------------------------
