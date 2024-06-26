@@ -173,4 +173,13 @@
         scope: global
         value: 'cache --timout=3600'
 
+ # GROUPS ---------------------------------------------------------------------
+
+- name: Add user to many groups
+  ansible.builtin.user:
+    name: gungnir
+    shell: /bin/bash
+    groups: sudo,kvm,libvirt
+    append: yes
+
 #  -----------------------------

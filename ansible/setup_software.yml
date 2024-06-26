@@ -22,8 +22,13 @@
           - veracrypt
           - okular
           - gwenview
+          - kwallet-pam
+          - kdenlive
+          - kwalletmanager
           - git
-          - python 
+          - python
+          - pyenv
+          - ruby
           - easyeffects
           - qmk
           - d-spy
@@ -42,6 +47,9 @@
           - wine
           - winetricks
           - wine-mono
+          - font-managers 
+          - android-udev
+          - kcalc
 
     - name: Install dependencies for other programs
       pacman:
@@ -65,6 +73,7 @@
           - com.spotify.Client
           - org.prismlauncher.PrismLauncher
           - com.github.tchx84.Flatseal
-          - io.gitlab.adhami3310.Footage
           - org.signal.Signal
+          - de.bund.ausweisapp.ausweisapp2
+          - org.mozilla.firefox
         state: present
