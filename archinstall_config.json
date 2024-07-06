@@ -104,6 +104,7 @@
         "firewalld",
         "wireless-regdb ",
         "power-profiles-daemon",
+        "cups",
         "flatpak",
         "openssh",
         "htop",

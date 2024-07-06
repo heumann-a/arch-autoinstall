@@ -46,6 +46,14 @@
       become: true
       shell: "powertop --auto-tune"
 
+# CUPS Socket --------------------------------------------------------------
+
+    - name: Set CUPS socket as active 
+      systemd:
+        name: cups.socket
+        enabled: yes
+        state: started
+
 # WIFI REGDOMAIN--------------------------------------------------------------
 
 - name: Ensure WIFI Domain is set to DE
@@ -53,6 +61,15 @@
       dest: /etc/conf.d/wireless-regdom
       regexp: '^#\s*WIRELESS_REGDOM.*$'
       line: 'WIRELESS_REGDOM="DE"'
+
+# SLEEP Config ----------------------------------------------------------------
+
+- name: Set Hibernate Delay Secons
+    lineinfile:
+      dest: /etc/systemd/sleep.conf
+        regexp: '#HibernateDelaySec='
+        line: 'HibernateDelaySec=10min'
+
 
 # IWD Backend ---------------------------------------------------------------
 
@@ -172,6 +189,12 @@
         name: credential.helper
         scope: global
         value: 'cache --timout=3600'
+
+ # PYTHON -----------------------------------------------------------------------
+
+    - name: Install pyenv-virtualenvs
+      become: no
+      shell: "git clone https://github.com/pyenv/pyenv-virtualenv.git $(pyenv root)/plugins/pyenv-virtualenv"
 
  # GROUPS ---------------------------------------------------------------------
 

@@ -50,6 +50,7 @@
           - font-managers 
           - android-udev
           - kcalc
+          - spectacle
 
     - name: Install dependencies for other programs
       pacman:
@@ -75,5 +76,5 @@
           - com.github.tchx84.Flatseal
           - org.signal.Signal
           - de.bund.ausweisapp.ausweisapp2
-          - org.mozilla.firefox
+          - com.brave.Browser
         state: present
