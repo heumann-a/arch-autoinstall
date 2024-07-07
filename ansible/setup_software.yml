@@ -51,6 +51,7 @@
           - android-udev
           - kcalc
           - spectacle
+          - podman
 
     - name: Install dependencies for other programs
       pacman:

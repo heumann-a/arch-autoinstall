@@ -54,6 +54,14 @@
         enabled: yes
         state: started
 
+# QEMU ----------------------------------------------------------------------
+
+    - name: Set Libvirt for QEMU
+      systemd:
+        name: libvirtd.service
+        enabled: yes
+        state: started
+
 # WIFI REGDOMAIN--------------------------------------------------------------
 
 - name: Ensure WIFI Domain is set to DE
