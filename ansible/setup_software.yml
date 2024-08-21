@@ -44,6 +44,8 @@
           - qemu-full
           - virt-manager
           - libvirt
+          - dnsmasq
+          - swtpm
           - wine
           - winetricks
           - wine-mono
@@ -52,6 +54,7 @@
           - kcalc
           - spectacle
           - podman
+          - reflector
 
     - name: Install dependencies for other programs
       pacman:
@@ -62,6 +65,23 @@
           - lsp-plugins-lv2
           - calf 
           - ttf-liberation # steam font
+
+    - name: Install VSCode extentions
+      shell: "code --install-extension {{ item }}"
+      with_items:
+        - continue.continue
+        - gruntfuggly.todo-tree
+        - james-yu.latex-workshop
+        - jeff-hykin.better-shellscript-syntax
+        - llvm-vs-code-extensions.vscode-clangd
+        - mechatroner.rainbow-csv
+        - mhutchie.git-graph
+        - moshfeu.diff-merge
+        - ms-azuretools.vscode-docker
+        - ms-python.debugpy
+        - ms-python.python
+        - rust-lang.rust-analyzer
+        - yzhang.markdown-all-in-one
 
 # --------------------------------------------
 # Install custom Tools not available in pacman

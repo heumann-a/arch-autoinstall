@@ -62,6 +62,19 @@
         enabled: yes
         state: started
 
+    - name: Set DNSMASQ for QEMU disabled
+      systemd:
+        name: dnsmasq.service
+        enabled: no
+        state: stopped
+
+    - name: Ensure that default network is active
+      community.libvirt.virt_net:
+        autostart: true
+        state: active
+        name: default
+
+              
 # WIFI REGDOMAIN--------------------------------------------------------------
 
 - name: Ensure WIFI Domain is set to DE
