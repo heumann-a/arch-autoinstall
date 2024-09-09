@@ -98,4 +98,5 @@
           - org.signal.Signal
           - de.bund.ausweisapp.ausweisapp2
           - com.brave.Browser
+          - io.podman_desktop.PodmanDesktop
         state: present

@@ -104,9 +104,6 @@ auth      sufficient  	pam_fprintd.so
    - `org.mpris.MediaPlayer2.spotify`
  - Restart Spotify
 
-```bash
-
-```
 
 ### Install AUR Package Manager aura
 
@@ -115,7 +112,6 @@ git clone https://aur.archlinux.org/aura-bin.git
 cd aura-bin
 makepkg
 sudo pacman -U <the-package-file-that-makepkg-produces>
-
 ```
 
 ### Install Snapper
@@ -136,10 +132,34 @@ sudo systemctl snapper-cleanup.time
 Copy config 
 
 
+### Install KiCad plugins
+
+- Interactive HTML BOM
+- Fabrication Toolkit
+- Keyboard footprints placer
+- Keyswitch Kicad Library
+- Transform3D
+- Impart Gui for KiCad 
+  - follow [Guide on Github Repo](https://github.com/Steffen-W/Import-LIB-KiCad-Plugin#use-of-the-application)
+  - SET **KICAD_3RD_PARTY** as **/home/gungnir/KiCad**
+
+
+### Stable-Diffusion with PYENV
+
+Die bei HSA ist abhängig der Grafikkarte, 7000er Serie hat Version 11.0.0.
+Die ROCM Version eventuall aktualisieren wenn eine neuere Version existiert für den Support einer neuen Grafikkarte
 
 
 ```bash
-
+git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git
+cd stable-diffusion-webui
+pyenv install 3.10.6
+pyenv virtualenv 3.10.6 webui
+pyenv local webui
+pip install wheel
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/rocm5.7
+export HSA_OVERRIDE_GFX_VERSION=11.0.0
+./webui.sh
 ```
 
 
