@@ -163,6 +163,12 @@ export HSA_OVERRIDE_GFX_VERSION=11.0.0
 ```
 
 
+### GEF
+```bash
+wget -O ~/.gdbinit-gef.py -q https://gef.blah.cat/py
+echo source ~/.gdbinit-gef.py >> ~/.gdbinit
+```
+
 ```bash
 
 ```

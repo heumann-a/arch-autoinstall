@@ -95,6 +95,8 @@
         "linux-firmware ",
         "mesa", 
         "libva-mesa-driver",
+        "vulkan-mesa-layers",
+        "lib32-vulkan-mesa-layers",
         "vulkan-radeon",
         "lib32-vulkan-radeon",
         "acpilight",

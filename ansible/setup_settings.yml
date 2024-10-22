@@ -77,61 +77,42 @@
               
 # WIFI REGDOMAIN--------------------------------------------------------------
 
-- name: Ensure WIFI Domain is set to DE
-    lineinfile:
-      dest: /etc/conf.d/wireless-regdom
-      regexp: '^#\s*WIRELESS_REGDOM.*$'
-      line: 'WIRELESS_REGDOM="DE"'
+    - name: Ensure WIFI Domain is set to DE
+      lineinfile:
+        dest: /etc/conf.d/wireless-regdom
+        regexp: '^#\s*WIRELESS_REGDOM.*$'
+        line: 'WIRELESS_REGDOM="DE"'
 
 # SLEEP Config ----------------------------------------------------------------
 
-- name: Set Hibernate Delay Secons
-    lineinfile:
-      dest: /etc/systemd/sleep.conf
+    - name: Set Hibernate Delay Secons
+      lineinfile:
+        dest: /etc/systemd/sleep.conf
         regexp: '#HibernateDelaySec='
         line: 'HibernateDelaySec=10min'
 
 
 # IWD Backend ---------------------------------------------------------------
 
-  - name: Disable iwd
-    systemd:
-      name: iwd.service
-      enabled: no
-      state: stopped
+    - name: Disable iwd
+      systemd:
+        name: iwd.service
+        enabled: no
+        state: stopped
 
-  - name: Creating a file with content
-    copy:
-      dest: /etc/NetworkManager/conf.d/wifi_backend.conf
-      content: |
-        [device]
-        wifi.backend=iwd
+    - name: Creating a file with content
+      copy:
+        dest: /etc/NetworkManager/conf.d/wifi_backend.conf
+        content: |
+          [device]
+          wifi.backend=iwd
 
 
 # FIREWALL -------------------------------------------------------------------
 
-  - name: Enable firewalld
-    systemd:
-      name: firewalld.service
-      enabled: yes
-      state: started
-
-# LOGROTATE  -----------------------------------------------------------------
-
-    - name: install logrotate
-      pacman:
-        name:
-          - logrotate
-
-    - name: logrotate - enable compression
-      lineinfile:
-        path: /etc/logrotate.conf
-        regexp: '^#compress$'
-        line: 'compress'
-
-    - name: enable and start daily logs rotation, cleanup
+    - name: Enable firewalld
       systemd:
-        name: logrotate.timer
+        name: firewalld.service
         enabled: yes
         state: started
 
@@ -194,6 +175,15 @@
         dest: /etc/udev/rules.d/50-qmk.rules
         mode: '0644'
 
+# TMUX ------------------------------------------------------------------------
+
+    - name: Copy TMUX Config rules
+      copy:
+        src: ../dotconfig/tmux.conf
+        dest: ~/.tmux.con
+        mode: '0644'
+
+
  # GIT -----------------------------------------------------------------------
 
     - git_config:
@@ -219,11 +209,11 @@
 
  # GROUPS ---------------------------------------------------------------------
 
-- name: Add user to many groups
-  ansible.builtin.user:
-    name: gungnir
-    shell: /bin/bash
-    groups: sudo,kvm,libvirt
-    append: yes
+    - name: Add user to many groups
+      ansible.builtin.user:
+        name: gungnir
+        shell: /bin/bash
+        groups: sudo,kvm,libvirt
+        append: yes
 
 #  -----------------------------
