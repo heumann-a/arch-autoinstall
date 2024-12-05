@@ -54,7 +54,8 @@
           - kcalc
           - spectacle
           - podman
-          - reflector
+          - atuin
+
 
     - name: Install dependencies for other programs
       pacman:
