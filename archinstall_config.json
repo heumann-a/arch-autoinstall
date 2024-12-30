@@ -121,6 +121,7 @@
         "pipewire-alsa",
         "pipewire-jack",
         "wireplumber",
+        "qpwgraph",
         "alacritty",
         "dolphin",
         "vivaldi",
