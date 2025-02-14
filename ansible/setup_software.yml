@@ -11,61 +11,79 @@
         name:
           - sudo
           - timeshift
-          - code
-          - zsh
-          - code
-          - inkscape
+          # Essential
           - vivaldi-ffmpeg-codecs 
           - vlc
-          - ffmpeg
+          - keepassxc
           - obsidian
           - veracrypt
-          - okular
-          - gwenview
           - kwallet-pam
           - kdenlive
           - kwalletmanager
+          - okular
+          - kcalc
+          - spectacle
+          # Programming
+          - code
+          - zsh
+          - inkscape
           - git
           - python
           - pyenv
+          - ffmpeg
           - ruby
-          - easyeffects
           - qmk
-          - d-spy
           - base-devel
+          # Sound + Video
+          - easyeffects
+          - gwenview
+          # Techstuff
+          - d-spy
           - kicad
           - snapper
           - snap-pac
-          - keepassxc
+          - font-managers 
+          - android-udev
+          # Gaming
           - discord
           - nextcloud-client 
           - steam
           - lutris 
+          - wine
+          - winetricks
+          - wine-mono
+          # Virtualisation
+          - podman
           - qemu-full
           - virt-manager
           - libvirt
           - dnsmasq
           - swtpm
-          - wine
-          - winetricks
-          - wine-mono
-          - font-managers 
-          - android-udev
-          - kcalc
-          - spectacle
-          - podman
+          # Terminal-Tools
           - atuin
-
+          - nnn
+          - glow
+          - ueberzug
 
     - name: Install dependencies for other programs
       pacman:
         reason: dependency
         name:
+        # KiCad
           - kicad-library 
           - kicad-library-3d
+        # EasyEffects
           - lsp-plugins-lv2
           - calf 
-          - ttf-liberation # steam font
+        # Steam font
+          - ttf-liberation 
+
+    - name: Install nnn plugins
+      shell: 'sh -c "$(curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs)"'
+
+    - name: Install tmux plugin manager
+      shell: 'git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm && ~/.tmux/plugins/tpm/bin/install_plugins'"'
+
 
     - name: Install VSCode extentions
       shell: "code --install-extension {{ item }}"

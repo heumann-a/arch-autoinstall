@@ -89,12 +89,10 @@
     "parallel downloads": 10,
     "packages": [
         "plasma",
-        "plasma-wayland-session",
         "xorg-xwayland",
         "amd-ucode",
         "linux-firmware ",
         "mesa", 
-        "libva-mesa-driver",
         "vulkan-mesa-layers",
         "lib32-vulkan-mesa-layers",
         "vulkan-radeon",

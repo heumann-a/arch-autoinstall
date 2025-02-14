@@ -118,7 +118,7 @@
 
 # HYPRLAND---------------------------------------------------------------------
 
-    - name: copy .myownrc
+    - name: copy hyprland config
       copy:
         src: ../dotconfig/hyprland.cfg
         dest: ~/.config/hypr/hyprland.conf
@@ -145,7 +145,7 @@
       become: no
       shell: "git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting"
 
-    - name: copy .myownrc
+    - name: copy zsh config
       copy:
         src: ../dotconfig/zsh.cfg
         dest: ~/.zshrc
@@ -154,17 +154,28 @@
 
 # BLACKARCH-------------------------------------------------------------------
 
-    - name: Download Blackarch.sh
-      ansible.builtin.get_url:
-        url: https://blackarch.org/strap.sh
-        dest: /tmp/strap.sh
-        mode: '0555'
-        checksum: sha1:26849980b35a42e6e192c6d9ed8c46f0d6d06047
+    # - name: Download Blackarch.sh
+    #   ansible.builtin.get_url:
+    #     url: https://blackarch.org/strap.sh
+    #     dest: /tmp/strap.sh
+    #     mode: '0555'
+    #     checksum: sha1:26849980b35a42e6e192c6d9ed8c46f0d6d06047
 
-    - name: Install Blackarch
+    # - name: Install Blackarch
+    #   become: yes
+    #   ansible.builtin.shell: /tmp/strap.sh
+
+
+# SNAPPER --------------------------------------------------------------------
+
+    - name: Copy snapper config
       become: yes
-      ansible.builtin.shell: /tmp/strap.sh
-
+      copy:
+        src: ../dotconfig/root.snapper.cfg
+        dest: /etc/snapper/configs/root
+        mode: '0640'
+        owner: root
+        group: root
 
 # QMK ------------------------------------------------------------------------
 
