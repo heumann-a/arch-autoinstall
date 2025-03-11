@@ -227,4 +227,19 @@
         groups: sudo,kvm,libvirt
         append: yes
 
+
+ # FIX Gaming ---------------------------------------------------------------------
+
+    - name: Add KDE env
+      copy:
+        dest: "/etc/environment"
+        content: |
+          #
+          # This file is parsed by pam_env module
+          #
+          # Syntax: simple "KEY=VAL" pairs on separate lines
+          #
+          KWIN_DRM_NO_DIRECT_SCANOUT=1
+        # end file
+
 #  -----------------------------
