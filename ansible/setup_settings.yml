@@ -116,6 +116,17 @@
         enabled: yes
         state: started
 
+
+# KEEPASSXC SSH-Agent Integration ---------------------------------------------
+
+    - name: Add Keepassxc SSH-Agent Integration
+      ansible.builtin.lineinfile:
+        path: /etc/security/pam_env.conf
+        search_string: "SSH_AUTH_SOCK"
+        line: "SSH_AUTH_SOCK DEFAULT=${XDG_RUNTIME_DIR}/ssh-agent.socket"
+        state: present
+
+
 # HYPRLAND---------------------------------------------------------------------
 
     - name: copy hyprland config
@@ -241,5 +252,6 @@
           #
           KWIN_DRM_NO_DIRECT_SCANOUT=1
         # end file
+        # https://gitlab.freedesktop.org/drm/amd/-/issues/2075
 
 #  -----------------------------
