@@ -1,0 +1,19 @@
+---
+---
+- name: setup_software.yml - software
+  hosts: all
+  become: yes
+
+  tasks:
+
+    - name: Install Wayland dependencies for SDDM
+      pacman:
+        name:
+          - layer-shell-qt
+          - layer-shell-qt5
+
+    - name: copy sddm wayland config
+      copy:
+        src: "../files/localhost/sddm-wayland.conf"
+        dest: "/etc/sddm.conf.d/10-wayland.conf"
+        mode: '0644'
