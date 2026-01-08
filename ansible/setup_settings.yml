@@ -68,6 +68,13 @@
         enabled: no
         state: stopped
 
+    - name: Disable virbr0 for Networkmanager
+      copy:
+        dest: /etc/NetworkManager/NetworkManager.conf
+        content: |
+          [keyfile]
+          unmanaged-devices=interface-name:virbr0
+      
     - name: Ensure that default network is active
       community.libvirt.virt_net:
         autostart: true
@@ -255,3 +262,5 @@
         # https://gitlab.freedesktop.org/drm/amd/-/issues/2075
 
 #  -----------------------------
+
+# ln -s /usr/share/applications/opensnitch_ui.desktop ~/.config/autostart/

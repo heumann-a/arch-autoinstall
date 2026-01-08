@@ -1,6 +1,6 @@
 ---
 ---
-- name: setup_software.yml - software
+- name: sddm_switch.yml - wayland
   hosts: all
   become: yes
 
