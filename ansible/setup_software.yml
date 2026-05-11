@@ -61,9 +61,8 @@
           - swtpm
           # Terminal-Tools
           - atuin
-          - nnn
           - glow
-          - ueberzug
+          
 
     - name: Install dependencies for other programs
       pacman:
@@ -77,13 +76,6 @@
           - calf 
         # Steam font
           - ttf-liberation 
-
-    - name: Install nnn plugins
-      shell: 'sh -c "$(curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs)"'
-
-    - name: Install tmux plugin manager
-      shell: 'git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm && ~/.tmux/plugins/tpm/bin/install_plugins'"'
-
 
     - name: Install VSCode extentions
       shell: "code --install-extension {{ item }}"

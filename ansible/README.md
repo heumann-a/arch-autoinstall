@@ -39,7 +39,6 @@ useful terminal programs, settings, maintenance services
 * enable members of wheel group to sudo
 * services to install and enable
     * ssh - remote access
-    * nnn - get plugins, no sudo needed
     * plocate - file search locate
     * cronie - cron time scheduler
     * archlinux-keyring - weekly update
